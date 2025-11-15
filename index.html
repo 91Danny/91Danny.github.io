@@ -3,27 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danny - Portfolio</title>
+    <title>Danny - RPG Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .projects { margin-top: 30px; }
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --experience: #27ae60;
+            --background: #1a1a2e;
+            --card-bg: #2d3047;
+            --text: #ecf0f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, #16213e 100%);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent), var(--experience));
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            border: 4px solid var(--text);
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+        }
+
+        .level-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .progress-item {
+            margin: 15px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: between;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--experience));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(52, 152, 219, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .achievement {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .achievement.unlocked {
+            border-color: gold;
+            background: linear-gradient(135deg, var(--card-bg), #2d2d2d);
+        }
+
+        /* Quest Log */
+        .quest-log {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .quest-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid var(--experience);
+        }
+
+        .quest-item.completed {
+            opacity: 0.7;
+            text-decoration: line-through;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .player-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Hi, I'm Danny 👋</h1>
-        <p>Welcome to my GitHub Portfolio</p>
+    <div class="container">
+        <!-- Player Header -->
+        <div class="header">
+            <div class="level-badge">Lv. 2</div>
+            <div class="player-info">
+                <div class="avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="player-details">
+                    <h1>Danny - The Developer</h1>
+                    <p>Full Stack Adventurer | Problem Solver</p>
+                    <div class="progress-container">
+                        <div class="progress-item">
+                            <div class="progress-label">
+                                <span>Experience</span>
+                                <span>300/800 XP</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 37.5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3><i class="fas fa-brain"></i> Intelligence</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+                <div class="stat-value">85%</div>
+            </div>
+            
+            <div class="stat-card">
+                <h3><i class="fas fa-fist-raised"></i> Strength</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%"></div>
+                </div>
+                <div class="stat-value">70%</div>
+            </div>
+            
+            <div class="stat-card">
+                <h3><i class="fas fa-bolt"></i> Agility</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 78%"></div>
+                </div>
+                <div class="stat-value">78%</div>
+            </div>
+            
+            <div class="stat-card">
+                <h3><i class="fas fa-shield-alt"></i> Defense</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%"></div>
+                </div>
+                <div class="stat-value">65%</div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="progress-container">
+            <h2><i class="fas fa-cogs"></i> Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">React</div>
+                <div class="skill-item">Node.js</div>
+                <div class="skill-item">Git</div>
+                <div class="skill-item">HTML/CSS</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">API Design</div>
+            </div>
+        </div>
+
+        <!-- Current Quests -->
+        <div class="quest-log">
+            <h2><i class="fas fa-scroll"></i> Current Quests</h2>
+            <div class="quest-item">
+                <strong>Main Quest:</strong> Build Amazing Portfolio
+            </div>
+            <div class="quest-item">
+                <strong>Side Quest:</strong> Learn New Framework
+            </div>
+            <div class="quest-item completed">
+                <strong>Completed:</strong> Set up GitHub Pages ✅
+            </div>
+            <div class="quest-item">
+                <strong>Daily Quest:</strong> Code for 1+ hours
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="progress-container">
+            <h2><i class="fas fa-trophy"></i> Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement unlocked">
+                    <i class="fas fa-code-branch fa-2x"></i>
+                    <p>First Commit</p>
+                </div>
+                <div class="achievement unlocked">
+                    <i class="fas fa-globe fa-2x"></i>
+                    <p>Portfolio Live</p>
+                </div>
+                <div class="achievement">
+                    <i class="fas fa-project-diagram fa-2x"></i>
+                    <p>5 Projects</p>
+                </div>
+                <div class="achievement">
+                    <i class="fas fa-users fa-2x"></i>
+                    <p>Team Project</p>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div class="about">
-        <h2>About Me</h2>
-        <p>This is my personal portfolio site hosted on GitHub Pages.</p>
-    </div>
-    
-    <div class="projects">
-        <h2>My Projects</h2>
-        <p>Projects will be listed here soon!</p>
-    </div>
+
+    <script>
+        // Animate progress bars on scroll
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Animate when page loads
+        window.addEventListener('load', animateProgressBars);
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const skills = document.querySelectorAll('.skill-item');
+            skills.forEach(skill => {
+                skill.addEventListener('click', function() {
+                    this.style.background = 'var(--experience)';
+                    setTimeout(() => {
+                        this.style.background = '';
+                    }, 1000);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
