@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My CI/CD Test Site</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>🎉 My First CI/CD Deployment!</h1>
+    <p class="success">If you can see this, CI/CD worked!</p>
+    <p>Repository: <span id="repo-name">Loading...</span></p>
+    <p>Deployed: <span id="timestamp"></span></p>
+    
+    <script>
+        document.getElementById('repo-name').textContent = window.location.hostname + window.location.pathname;
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
