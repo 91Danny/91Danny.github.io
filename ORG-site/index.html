@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepak Narayan Shinde - System Administrator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #1f6b42;
+            --secondary: #008080;
+            --accent: #228B22;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fefefe;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 70px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,138.7C960,139,1056,181,1152,181.3C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 25px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--primary);
+        }
+        
+        .header-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header-content .tagline {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .contact-item i {
+            margin-right: 8px;
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .stat-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .skill-category {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            transition: var(--transition);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-category h3 i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tag {
+            background: var(--light-gray);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--light-gray);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+            width: 100%;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            width: 45%;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            left: 55%;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border: 3px solid white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        
+        .job-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .company {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .duration {
+            color: var(--secondary);
+            font-style: italic;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: var(--light-gray);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-content ul {
+            padding-left: 20px;
+        }
+        
+        .timeline-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        /* Certifications */
+        .certifications {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .cert-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cert-badge i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .project-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 20px;
+        }
+        
+        .project-tag {
+            background: var(--light-gray);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--dark);
+        }
+        
+        /* Education Section */
+        .education-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .education-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .education-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .education-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .education-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .education-card p {
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+        
+        .year {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        /* Contact Section */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .contact-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+        
+        .contact-link i {
+            margin-right: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .availability {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+        
+        .specialization {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: var(--light-gray);
+        }
+        
+        .profile-views {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 80px);
+                left: 80px !important;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header-content .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-item {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content fade-in">
+                <div class="profile-img">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h1>Deepak Narayan Shinde</h1>
+                <p class="tagline">System Administrator</p>
+                <p>Cloud & eCommerce Infrastructure | AWS Solutions Architect</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Nashik, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 917296xxxx</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Deepaksh027@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Professional Summary</h2>
+                <p class="section-subtitle">A dedicated System Administrator with expertise in eCommerce infrastructure and cloud solutions</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card fade-in">
+                    <i class="fas fa-server"></i>
+                    <h3>Infrastructure Management</h3>
+                    <p>Specializing in Magento and Shopware eCommerce platforms with proven skills in Linux, automation, and performance optimization for high-traffic online stores.</p>
+                </div>
+                
+                <div class="stat-card fade-in">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance & Uptime</h3>
+                    <p>Maintained 99.9% uptime for 30+ simultaneous Magento stores while resolving 15+ complex server tickets weekly with 95%+ client satisfaction.</p>
+                </div>
+                
+                <div class="stat-card fade-in">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud Expertise</h3>
+                    <p>AWS Solutions Architect with Red Hat certifications, experienced in implementing high-availability solutions for eCommerce platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Expertise -->
+    <section style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Expertise</h2>
+                <p class="section-subtitle">Comprehensive skills across infrastructure, cloud, and system administration</p>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-network-wired"></i> Infrastructure & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Magento Administration</span>
+                        <span class="skill-tag">Shopware Deployment</span>
+                        <span class="skill-tag">CI/CD Pipeline</span>
+                        <span class="skill-tag">LEMP Stack Expert</span>
+                        <span class="skill-tag">cPanel/WHM Professional</span>
+                        <span class="skill-tag">Web Hosting Management</span>
+                        <span class="skill-tag">Server Administration</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-cloud"></i> Cloud & Certifications</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS Solutions Architect</span>
+                        <span class="skill-tag">Red Hat RHCE</span>
+                        <span class="skill-tag">Red Hat RHCSA</span>
+                        <span class="skill-tag">Cloud Infrastructure</span>
+                        <span class="skill-tag">Scalable Deployments</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-terminal"></i> Operating Systems & Scripting</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux Administration</span>
+                        <span class="skill-tag">Bash Scripting</span>
+                        <span class="skill-tag">Python Automation</span>
+                        <span class="skill-tag">System Automation</span>
+                        <span class="skill-tag">Performance Tuning</span>
+                        <span class="skill-tag">Process Optimization</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-globe"></i> Web Servers & Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Nginx Configuration</span>
+                        <span class="skill-tag">Apache Optimization</span>
+                        <span class="skill-tag">MySQL Administration</span>
+                        <span class="skill-tag">High Performance Setup</span>
+                        <span class="skill-tag">Database Optimization</span>
+                        <span class="skill-tag">Backup & Recovery</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-shield-alt"></i> Networking & Security</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TCP/IP Protocols</span>
+                        <span class="skill-tag">DNS Management</span>
+                        <span class="skill-tag">HTTP/HTTPS Security</span>
+                        <span class="skill-tag">Firewall Configuration</span>
+                        <span class="skill-tag">Server Hardening</span>
+                        <span class="skill-tag">SSL/TLS Implementation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+                <p class="section-subtitle">Professional credentials validating technical expertise</p>
+            </div>
+            
+            <div class="certifications">
+                <a href="https://www.credly.com/badges/4ae52718a0ba476890673bc3f621f4a4" class="cert-badge fade-in">
+                    <i class="fab fa-aws"></i> AWS Solutions Architect
+                </a>
+                <div class="cert-badge fade-in">
+                    <i class="fab fa-redhat"></i> Red Hat RHCE
+                </div>
+                <div class="cert-badge fade-in">
+                    <i class="fab fa-redhat"></i> Red Hat RHCSA
+                </div>
+                <div class="cert-badge fade-in">
+                    <i class="fas fa-cog"></i> WHM Administration
+                </div>
+                <div class="cert-badge fade-in">
+                    <i class="fas fa-sliders-h"></i> cPanel Professional
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Professional Experience</h2>
+                <p class="section-subtitle">Proven track record in system administration and eCommerce infrastructure</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">System Administrator</h3>
+                        <p class="company">WebScoot.io – Managed eCommerce Hosting</p>
+                        <span class="duration">Jan 2023 - Present</span>
+                        <ul>
+                            <li>Managed infrastructure for 30+ simultaneous Magento stores, maintaining 99.9% uptime</li>
+                            <li>Resolved 15+ complex server tickets weekly with 95%+ client satisfaction</li>
+                            <li>Implemented high-availability solutions for eCommerce platforms</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">Technical Support / System Administrator</h3>
+                        <p class="company">MilesWeb – Hosting & Domain Solutions</p>
+                        <span class="duration">May 2022 - Dec 2022</span>
+                        <ul>
+                            <li>Provided comprehensive technical support across shared hosting, VPS, dedicated servers, and cloud hosting</li>
+                            <li>Successfully migrated client websites and resolved complex server-related issues</li>
+                            <li>Managed and secured cPanel/WHM environments with security optimizations</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">Operating Engineer</h3>
+                        <p class="company">Haldex Anand India Private Limited</p>
+                        <span class="duration">May 2019 - Sept 2021</span>
+                        <ul>
+                            <li>Supported critical operational systems and utilized automation techniques</li>
+                            <li>Drove efficiency through automation and cross-functional collaboration</li>
+                            <li>Maintained overall system performance and reliability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Projects -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Key Projects</h2>
+                <p class="section-subtitle">Practical implementations of technical expertise</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Automated Nginx Setup</h3>
+                    <p>Bash script for production-ready Nginx web servers with optimized configuration for high-performance environments.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Bash Scripting</span>
+                        <span class="project-tag">Nginx</span>
+                        <span class="project-tag">Linux</span>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>System Admin Scripts</h3>
+                    <p>Repository of automation scripts for system administration tasks, improving efficiency and reducing manual errors.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Bash</span>
+                        <span class="project-tag">Automation</span>
+                    </div>
+                </div>
+                
+                <div class="project-card fade-in">
+                    <div class="project-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>eCommerce Deployment</h3>
+                    <p>Complete deployment of Shopware 6 & Magento on LEMP stack with optimized performance and security configurations.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Magento</span>
+                        <span class="project-tag">Shopware</span>
+                        <span class="project-tag">LEMP Stack</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section style="background-color: var(--light-gray);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Education & Qualifications</h2>
+                <p class="section-subtitle">Academic background and professional development</p>
+            </div>
+            
+            <div class="education-cards">
+                <div class="education-card fade-in">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Diploma in Electrical Engineering</h3>
+                    <p>Technical Board</p>
+                    <span class="year">2019</span>
+                </div>
+                
+                <div class="education-card fade-in">
+                    <i class="fas fa-school"></i>
+                    <h3>SSC (Secondary School Certificate)</h3>
+                    <p>State Board</p>
+                    <span class="year">2016</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Connect With Me</h2>
+                <p class="section-subtitle">Let's discuss opportunities and collaborations</p>
+            </div>
+            
+            <div class="contact-links">
+                <a href="https://91danny.github.io" class="contact-link fade-in">
+                    <i class="fas fa-globe"></i> Portfolio
+                </a>
+                <a href="https://github.com/91Danny" class="contact-link fade-in">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" class="contact-link fade-in">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+                <a href="mailto:Deepaksh027@gmail.com" class="contact-link fade-in">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="tel:+91917296xxxx" class="contact-link fade-in">
+                    <i class="fas fa-phone"></i> Phone
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="availability">🎯 Available for challenging System Administration roles</p>
+            <p class="specialization">☁️ Specializing in Cloud Infrastructure & eCommerce Solutions</p>
+            <div class="profile-views">Profile Views</div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = 1;
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state
+            fadeElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll(); // Check on load
+        });
+    </script>
+</body>
+</html>
